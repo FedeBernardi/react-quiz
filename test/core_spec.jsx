@@ -2,9 +2,46 @@
 import { List, Map } from 'immutable';
 import { expect } from 'chai';
 
-import { setEntries, startGame, play, next, setResults } from '../src/core';
+import { request, logInSuccess, logInFailure, setEntries, startGame, play, next, setResults } from '../src/core';
 
 describe('application logic', () => {
+
+  describe('Log in process', () => {
+    
+    it('request was sent', () => {
+      const state = Map();
+      const nextState = request(state);
+      expect(nextState).to.equal(Map({
+        isFetching: true,
+        isAuthenticated: false
+      }));
+    });
+
+
+    it('login success', () => {
+      const state = Map();
+      const token = "2354-HGDFD-67"
+      const nextState = logInSuccess(state, token);
+      expect(nextState).to.equal(Map({
+        isFetching: false,
+        isAuthenticated: true,
+        errorMessage: ''
+      }));
+    });
+
+    it('login failure', () => {
+      const state = Map();
+      const error = 'The user doesn\'t exists';
+      const nextState = logInFailure(state, error);
+      expect(nextState).to.equal(Map({
+        isFetching: true,
+        isAuthenticated: false,
+        errorMessage: error
+      }));
+    });
+
+  });
+
 
   describe('setEntries', () => {
 

@@ -1,4 +1,6 @@
 import { Map, List, fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+
 
 /*
 * Include entries in state (to use before start a new game)
@@ -104,7 +106,7 @@ export function setResults(state) {
 }
 
 
-export default function (state = Map(), action) {
+function app (state = Map(), action) {
   switch(action.type) {
     case 'SET_ENTRIES':
       return setEntries(state, action.entries);
@@ -122,3 +124,53 @@ export default function (state = Map(), action) {
       return state;
   }
 }
+
+
+//AUTH REDUCER
+//
+
+export function request(authState){
+  return authState.merge({
+    isFetching: true,
+    isAuthenticated: false
+  });
+}
+
+export function logInSuccess (authState, token) {
+  localStorage.setItem('id_token', token);
+
+  return authState.merge({
+    isFetching: false,
+    isAuthenticated: true,
+    errorMessage: ''
+  });
+}
+
+export function logInFailure (authState, error) {
+  return authState.merge({
+    isFetching: false,
+    isAuthenticated: false,
+    errorMessage: error
+  });
+}
+
+
+function auth (state = fromJS({
+  isFetching: false,
+  isAuthenticated: localStorage.getItem('id_token') ? true: false
+}), action){
+
+  switch(action.type) {
+    case 'REQUEST':
+      return request(state);
+    case 'LOGIN_SUCCESS':
+      return logInSuccess(state, action.token);
+    case 'LOGIN_FAILURE':
+      return logInFailure(state, action.error);
+    default:
+      return state;
+  }
+
+}
+
+export default combineReducers({app, auth});

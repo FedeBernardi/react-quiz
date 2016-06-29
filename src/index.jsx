@@ -14,6 +14,11 @@ import Demo from './components/Demo';
 
 const store = createStore(Reducer);
 
+store.subscribe(function(){
+
+  console.log(store.getState());
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>

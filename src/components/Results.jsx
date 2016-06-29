@@ -47,8 +47,8 @@ export const Results = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    tally: state.getIn(['game', 'tally']),
-    userName: state.getIn(['game', 'user'])
+    tally: state.getIn(['app','game', 'tally']),
+    userName: state.getIn(['app','game', 'user'])
   };
 };
 

@@ -31,3 +31,22 @@ export function setResults(){
   };
 }
 
+export function request(){
+  return {
+    type: 'REQUEST'
+  };
+}
+
+export function logInSuccess(token){
+  return {
+    type: 'LOGIN_SUCCESS',
+    token
+  };
+}
+
+export function logInFailure(error){
+  return {
+    type: 'LOGIN_FAILURE',
+    error
+  };
+}

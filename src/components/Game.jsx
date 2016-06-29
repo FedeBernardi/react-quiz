@@ -74,12 +74,12 @@ export const Game = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    question: state.getIn(['game', 'round', 'question']),
-    tally: state.getIn(['game', 'tally']),
-    userName: state.getIn(['game', 'user']),
-    answers: state.getIn(['game', 'round', 'answers']),
-    correct: state.getIn(['game','round','correctAnswer']),
-    selected: state.getIn(['game', 'round', 'selectedAnswer'])
+    question: state.getIn(['app','game', 'round', 'question']),
+    tally: state.getIn(['app','game', 'tally']),
+    userName: state.getIn(['app','game', 'user']),
+    answers: state.getIn(['app','game', 'round', 'answers']),
+    correct: state.getIn(['app','game','round','correctAnswer']),
+    selected: state.getIn(['app','game', 'round', 'selectedAnswer'])
   };
 };
 
