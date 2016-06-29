@@ -17,7 +17,7 @@ describe('application logic', () => {
       }));
     });
 
-
+    //This test fails because of Local Storage
     it('login success', () => {
       const state = Map();
       const token = "2354-HGDFD-67"
