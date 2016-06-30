@@ -2,7 +2,7 @@
 import { List, Map } from 'immutable';
 import { expect } from 'chai';
 
-import { request, logInSuccess, logInFailure, setEntries, startGame, play, next, setResults } from '../src/core';
+import { requestLogin, loginSuccess, loginFailure, setEntries, startGame, play, next, setResults } from '../src/core';
 
 describe('application logic', () => {
 
@@ -10,18 +10,16 @@ describe('application logic', () => {
     
     it('request was sent', () => {
       const state = Map();
-      const nextState = request(state);
+      const nextState = requestLogin(state);
       expect(nextState).to.equal(Map({
         isFetching: true,
         isAuthenticated: false
       }));
     });
 
-    //This test fails because of Local Storage
     it('login success', () => {
       const state = Map();
-      const token = "2354-HGDFD-67"
-      const nextState = logInSuccess(state, token);
+      const nextState = loginSuccess(state);
       expect(nextState).to.equal(Map({
         isFetching: false,
         isAuthenticated: true,
@@ -32,9 +30,9 @@ describe('application logic', () => {
     it('login failure', () => {
       const state = Map();
       const error = 'The user doesn\'t exists';
-      const nextState = logInFailure(state, error);
+      const nextState = loginFailure(state, error);
       expect(nextState).to.equal(Map({
-        isFetching: true,
+        isFetching: false,
         isAuthenticated: false,
         errorMessage: error
       }));

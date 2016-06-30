@@ -23,6 +23,7 @@ export const LogIn = React.createClass({
   //also executes the action to set the entries and start the game.
   handleButtonClick(){
     if (this.state.userText && !this.flagToPlay) {
+      this.props.loginUser();
       this.props.setEntries(entries);
       this.props.startGame(this.state.userText);
       // se supone q debo usar this.context.router.push pero no anda :(

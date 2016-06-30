@@ -129,16 +129,14 @@ function app (state = Map(), action) {
 //AUTH REDUCER
 //
 
-export function request(authState){
+export function requestLogin(authState){
   return authState.merge({
     isFetching: true,
     isAuthenticated: false
   });
 }
 
-export function logInSuccess (authState, token) {
-  localStorage.setItem('id_token', token);
-
+export function loginSuccess (authState) {
   return authState.merge({
     isFetching: false,
     isAuthenticated: true,
@@ -146,7 +144,7 @@ export function logInSuccess (authState, token) {
   });
 }
 
-export function logInFailure (authState, error) {
+export function loginFailure (authState, error) {
   return authState.merge({
     isFetching: false,
     isAuthenticated: false,
@@ -162,11 +160,11 @@ function auth (state = fromJS({
 
   switch(action.type) {
     case 'REQUEST':
-      return request(state);
+      return requestLogin(state);
     case 'LOGIN_SUCCESS':
-      return logInSuccess(state, action.token);
+      return loginSuccess(state);
     case 'LOGIN_FAILURE':
-      return logInFailure(state, action.error);
+      return loginFailure(state, action.error);
     default:
       return state;
   }
