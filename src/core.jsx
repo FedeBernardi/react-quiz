@@ -10,10 +10,8 @@ export function setEntries(state, entries) {
 }
 
 /*
-* Init user, tally and first round to star to play
+* Init tally and first round to star to play
 * @param Map state
-* @param string newUser
-* @TODO newUser will be a map (or object) in future versions
 */
 export function startGame(state) {
   const entries = state.get('entries');
@@ -62,8 +60,7 @@ export function next(state) {
       game: Map(
         {
           round: entries.first(),
-          tally: state.getIn(['game','tally']),
-          user: state.getIn(['game','user'])
+          tally: state.getIn(['game','tally'])
         }
       ),
       entries: entries.skip(1)
@@ -72,8 +69,7 @@ export function next(state) {
   return state.merge({
     game: Map(
       {
-        tally: state.getIn(['game','tally']),
-        user: state.getIn(['game','user'])
+        tally: state.getIn(['game','tally'])
       }
     ),
     entries: List()
@@ -87,14 +83,12 @@ export function next(state) {
 * @param Map state
 */
 export function setResults(state) {
-  const userInGame = state.getIn(['game','user']);
   const tallyInGame = state.getIn(['game','tally']);
   if (!state.hasIn(['game','round'])) {
     return Map({
       results: List.of(
         Map(
           {
-            user: userInGame,
             tally: tallyInGame
           }
         )

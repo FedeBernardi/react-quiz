@@ -114,7 +114,7 @@ describe('application logic', () => {
 
   describe('startGame', () => {
 
-    it('set user, tally and initial round when start game', () => {
+    it('set tally and initial round when start game', () => {
       const state = Map({
         entries: List.of(
           Map({
@@ -135,8 +135,7 @@ describe('application logic', () => {
           })
         )
       });
-      const user = 'Test User';
-      const nextState = startGame(state, user);
+      const nextState = startGame(state);
       expect(nextState).to.equal(Map({
         entries: List.of(
           Map({
@@ -157,8 +156,7 @@ describe('application logic', () => {
             ),
             'correctAnswer': 1
           }),
-          tally: 0,
-          user: 'Test User'
+          tally: 0
         })
       }));
     });
@@ -260,8 +258,7 @@ describe('application logic', () => {
             ),
             'correctAnswer': 1
           }),
-          tally: 1,
-          user: 'Test User'
+          tally: 1
         })
       });
       const nextState = next(state);
@@ -285,8 +282,7 @@ describe('application logic', () => {
             ),
             'correctAnswer': 2
           }),
-          tally: 1,
-          user: 'Test User'
+          tally: 1
         })
       }));
     });
@@ -320,8 +316,7 @@ describe('application logic', () => {
             ),
             'correctAnswer': 1
           }),
-          tally: 1,
-          user: 'Test User'
+          tally: 1
         })
       });
       const nextState = next(state);
@@ -345,13 +340,12 @@ describe('application logic', () => {
             ),
             'correctAnswer': 2
           }),
-          tally: 1,
-          user: 'Test User'
+          tally: 1
         })
       }));
     });
 
-    it('No more rounds, game end! ', () => {
+    it('no more rounds, game end! ', () => {
       const state = Map({
         entries: List(),
         game: Map({
@@ -363,16 +357,14 @@ describe('application logic', () => {
             ),
             'correctAnswer': 1
           }),
-          tally: 5,
-          user: 'Test User'
+          tally: 5
         })
       });
       const nextState = next(state);
       expect(nextState).to.equal(Map({
         entries: List(),
         game: Map({
-          tally: 5,
-          user: 'Test User'
+          tally: 5
         })
       }));
     });
@@ -384,8 +376,7 @@ describe('application logic', () => {
       const state = Map({
         entries: List(),
         game: Map({
-          tally: 5,
-          user: 'Test User'
+          tally: 5
         })
       });
       const nextState = setResults(state);
