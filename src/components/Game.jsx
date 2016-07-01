@@ -51,6 +51,7 @@ export const Game = React.createClass({
             <p className='user'>Player: {this.props.userName}</p>
           </div>
           <div className='col-md-6'>
+            <Quit history={this.props.history} />
             <span className='text-right tally'>
               <Tally total={this.props.tally} />
             </span>
@@ -65,7 +66,7 @@ export const Game = React.createClass({
             />
           ) : ''}
         </div>
-        <Quit history={this.props.history} />
+
         {this.props.selected ? <Next next={this.props.next} /> : ''}
       </div>
     );
