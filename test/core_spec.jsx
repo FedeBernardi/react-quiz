@@ -19,10 +19,11 @@ describe('application logic', () => {
 
     it('login success', () => {
       const state = Map();
-      const nextState = loginSuccess(state);
+      const nextState = loginSuccess(state, 'userTest');
       expect(nextState).to.equal(Map({
         isFetching: false,
         isAuthenticated: true,
+        user: 'userTest',
         errorMessage: ''
       }));
     });
