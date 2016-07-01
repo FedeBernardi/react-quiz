@@ -25,7 +25,7 @@ export const LogIn = React.createClass({
     if (this.state.userText && !this.flagToPlay) {
       this.props.loginUser({user: this.state.userText});
       this.props.setEntries(entries);
-      this.props.startGame(this.state.userText);
+      this.props.startGame();
       // se supone q debo usar this.context.router.push pero no anda :(
       this.props.history.push('/game');
     }

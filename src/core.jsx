@@ -15,14 +15,13 @@ export function setEntries(state, entries) {
 * @param string newUser
 * @TODO newUser will be a map (or object) in future versions
 */
-export function startGame(state, newUser) {
+export function startGame(state) {
   const entries = state.get('entries');
   return state.merge({
     game: Map(
       {
         round: entries.first(),
-        tally: 0,
-        user: newUser
+        tally: 0
       }
     ),
     entries: entries.skip(1)
@@ -111,7 +110,7 @@ function app (state = Map(), action) {
     case 'SET_ENTRIES':
       return setEntries(state, action.entries);
     case 'START_GAME':
-      return startGame(state, action.user);
+      return startGame(state);
     case 'PLAY':
       return state.update('game', gameState =>
         play(gameState, action.answer)

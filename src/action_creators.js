@@ -9,10 +9,9 @@ export function setEntries(entries){
   };
 }
 
-export function startGame(user){
+export function startGame(){
   return {
-    type: 'START_GAME',
-    user
+    type: 'START_GAME'
   };
 }
 
