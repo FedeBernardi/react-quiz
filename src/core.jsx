@@ -136,10 +136,11 @@ export function requestLogin(authState){
   });
 }
 
-export function loginSuccess (authState) {
+export function loginSuccess (authState, username) {
   return authState.merge({
     isFetching: false,
     isAuthenticated: true,
+    user: username,
     errorMessage: ''
   });
 }
@@ -162,7 +163,7 @@ function auth (state = fromJS({
     case 'REQUEST':
       return requestLogin(state);
     case 'LOGIN_SUCCESS':
-      return loginSuccess(state);
+      return loginSuccess(state, action.username);
     case 'LOGIN_FAILURE':
       return loginFailure(state, action.error);
     default:

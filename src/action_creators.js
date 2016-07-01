@@ -41,9 +41,10 @@ export function requestLogin(){
   };
 }
 
-export function loginSuccess(){
+export function loginSuccess(username){
   return {
-    type: 'LOGIN_SUCCESS'
+    type: 'LOGIN_SUCCESS',
+    username
   };
 }
 
@@ -55,8 +56,8 @@ export function loginFailure(error){
 }
 
 //@TODO:
-//  This function should recive some credentials to send to the API.
-export function loginUser(){
+//  Add the credentials to the API call as data.
+export function loginUser(creds){
   let config = {
     baseURL: BASE_URL,
     url: '/tokens/0',
@@ -69,7 +70,7 @@ export function loginUser(){
     return axios(config)
       .then(response => {
         if(response.status === 200) {
-          dispatch(loginSuccess());
+          dispatch(loginSuccess(creds.user));
 
           //Persisting Token in Local Storage
           let token = JSON.stringify(response.data.token)
