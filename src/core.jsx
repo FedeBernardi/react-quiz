@@ -102,7 +102,7 @@ export function setResults(state) {
 function app (state = Map(), action) {
   switch(action.type) {
     case 'SET_ENTRIES':
-      return setEntries(state, action.entries);
+      return setEntries(state, action.data);
     case 'START_GAME':
       return startGame(state);
     case 'PLAY':

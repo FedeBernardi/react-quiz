@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import Button from './Button';
 import * as actionCreators from '../action_creators';
-import { entries } from '../entries';
 
 export const Results = React.createClass({
   displayName: 'Results',
@@ -11,16 +10,19 @@ export const Results = React.createClass({
   propTypes: {
     tally: React.PropTypes.number,
     history: React.PropTypes.object,
-    setEntries: React.PropTypes.func,
-    startGame: React.PropTypes.func,
-    userName: React.PropTypes.string
+    fetchQuestions: React.PropTypes.func,
+    startGame: React.PropTypes.func
   },
 
   handlePlayAgainButtonClick(){
-    const user = this.props.userName;
-    this.props.setEntries(entries);
-    this.props.startGame(user);
-    this.props.history.push('/game');
+    this.props.fetchQuestions();
+
+    //Temporal solution for timing problems when
+    //we fetch the questions
+    setTimeout(() => {
+      this.props.startGame();
+      this.props.history.push('/game');
+    }, 1000);
   },
 
   handleLogInButtonClick(){
@@ -47,8 +49,7 @@ export const Results = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    tally: state.getIn(['app','game', 'tally']),
-    userName: state.getIn(['app','game', 'user'])
+    tally: state.getIn(['app','game', 'tally'])
   };
 };
 

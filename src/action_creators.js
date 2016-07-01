@@ -2,11 +2,28 @@ import axios from 'axios';
 
 const BASE_URL = 'http://localhost:3002';
 
-export function setEntries(entries){
+//We don't need this function anymore because we access to
+//it from 'fetchQuestions'.
+/*export function setEntries(entries){
   return {
     type: 'SET_ENTRIES',
     entries
   };
+}*/
+
+export function fetchQuestions (){
+  return {
+    callApi: {
+      config: {
+        baseURL: BASE_URL,
+        url: '/questions',
+        method: 'GET',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}
+      },
+      types: ['SET_ENTRIES']
+    }
+
+  }
 }
 
 export function startGame(){

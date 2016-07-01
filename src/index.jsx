@@ -12,8 +12,9 @@ import { ResultsContainer } from './components/Results';
 import Reducer from './core';
 import Demo from './components/Demo';
 import thunk from 'redux-thunk';
+import api from './middlewares/api';
 
-const store = createStore(Reducer, applyMiddleware(thunk));
+const store = createStore(Reducer, applyMiddleware(thunk, api));
 
 ReactDOM.render(
   <Provider store={store}>
