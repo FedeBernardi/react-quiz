@@ -76,7 +76,7 @@ const mapStateToProps = state => {
   return {
     question: state.getIn(['app','game', 'round', 'question']),
     tally: state.getIn(['app','game', 'tally']),
-    userName: state.getIn(['app','game', 'user']),
+    userName: state.getIn(['auth', 'user']),
     answers: state.getIn(['app','game', 'round', 'answers']),
     correct: state.getIn(['app','game','round','correctAnswer']),
     selected: state.getIn(['app','game', 'round', 'selectedAnswer'])
