@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import Header from './Header';
 import Button from './Button';
 import * as actionCreators from '../action_creators';
-import { entries } from '../entries';
 
 export const Results = React.createClass({
   displayName: 'Results',
@@ -11,19 +10,19 @@ export const Results = React.createClass({
   propTypes: {
     tally: React.PropTypes.number,
     history: React.PropTypes.object,
-    setEntries: React.PropTypes.func,
-    startGame: React.PropTypes.func,
-    userName: React.PropTypes.string
+    fetchQuestions: React.PropTypes.func,
+    startGame: React.PropTypes.func
   },
 
-  playAgainButtonClick(){
-    const user = this.props.userName;
-    this.props.setEntries(entries);
-    this.props.startGame(user);
-    this.props.history.push('/game');
+  handlePlayAgainButtonClick(){
+    this.props.fetchQuestions()
+      .then(()=>{
+        this.props.startGame();
+        this.props.history.push('/game');
+      });
   },
 
-  logInButtonClick(){
+  handleLogInButtonClick(){
     this.props.history.push('/');
   },
 
@@ -32,13 +31,13 @@ export const Results = React.createClass({
       <div className='main container-fluid'>
         <Header appName='React Quiz' />
         <div className='resultText'>
-          <h1>You finished the game !</h1>          
+          <h1>You finished the game !</h1>
           <h2>Final score:</h2>
           <h3>{this.props.tally}/6</h3>
         </div>
         <div>
-          <Button text='Play Again!' onHandleButtonClick={this.playAgainButtonClick} />
-          <Button text='Go to Log In' onHandleButtonClick={this.logInButtonClick} />
+          <Button text='Play Again!' onHandleButtonClick={this.handlePlayAgainButtonClick} />
+          <Button text='Go to Log In' onHandleButtonClick={this.handleLogInButtonClick} />
         </div>
       </div>
     );
@@ -47,8 +46,7 @@ export const Results = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    tally: state.getIn(['game', 'tally']),
-    userName: state.getIn(['game', 'user'])
+    tally: state.getIn(['app','game', 'tally'])
   };
 };
 

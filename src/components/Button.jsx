@@ -6,14 +6,23 @@ export default React.createClass({
   propTypes: {
     text: React.PropTypes.string,
     onHandleButtonClick: React.PropTypes.func,
-    disabled: React.PropTypes.bool
+    disabled: React.PropTypes.bool,
+    align: React.PropTypes.string
+  },
+  getDefaultProps: function() {
+    return {
+      align: 'center-block'
+    };
+  },
+  alignButton: function() {
+    return 'btn btn-lg btn-primary fadeInUp ' + this.props.align;
   },
 
   render() {
     return (
       <div className='row button'>
         <div className='col-md-12'>
-          <button className='btn btn-lg btn-primary center-block fadeInUp'
+          <button className={this.alignButton()}
             onClick={this.props.onHandleButtonClick}
             disabled={this.props.disabled}
           >

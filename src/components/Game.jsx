@@ -51,6 +51,7 @@ export const Game = React.createClass({
             <p className='user'>Player: {this.props.userName}</p>
           </div>
           <div className='col-md-6'>
+            <Quit history={this.props.history} />
             <span className='text-right tally'>
               <Tally total={this.props.tally} />
             </span>
@@ -65,7 +66,7 @@ export const Game = React.createClass({
             />
           ) : ''}
         </div>
-        <Quit history={this.props.history} />
+
         {this.props.selected ? <Next next={this.props.next} /> : ''}
       </div>
     );
@@ -74,12 +75,12 @@ export const Game = React.createClass({
 
 const mapStateToProps = state => {
   return {
-    question: state.getIn(['game', 'round', 'question']),
-    tally: state.getIn(['game', 'tally']),
-    userName: state.getIn(['game', 'user']),
-    answers: state.getIn(['game', 'round', 'answers']),
-    correct: state.getIn(['game','round','correctAnswer']),
-    selected: state.getIn(['game', 'round', 'selectedAnswer'])
+    question: state.getIn(['app','game', 'round', 'question']),
+    tally: state.getIn(['app','game', 'tally']),
+    userName: state.getIn(['auth', 'user']),
+    answers: state.getIn(['app','game', 'round', 'answers']),
+    correct: state.getIn(['app','game','round','correctAnswer']),
+    selected: state.getIn(['app','game', 'round', 'selectedAnswer'])
   };
 };
 

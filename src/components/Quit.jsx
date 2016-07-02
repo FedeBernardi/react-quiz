@@ -7,7 +7,7 @@ export default React.createClass({
   propTypes: {
     disabled: React.PropTypes.bool,
     history: React.PropTypes.object,
-    onHandleButtonClick: React.PropTypes.func 
+    onHandleButtonClick: React.PropTypes.func
   },
 
   handleButtonClick(){
@@ -16,8 +16,10 @@ export default React.createClass({
 
   render(){
     return (
-      <Button text='Quit' onHandleButtonClick={this.handleButtonClick}
-        disabled={false} />
+      <Button align='pull-right' text='Quit'
+        onHandleButtonClick={this.handleButtonClick}
+        disabled={false}
+      />
     );
   }
 

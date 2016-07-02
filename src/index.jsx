@@ -5,14 +5,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router, Route, hashHistory } from 'react-router';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import { MainContainer } from './components/Main';
 import { GameContainer } from './components/Game';
 import { ResultsContainer } from './components/Results';
 import Reducer from './core';
 import Demo from './components/Demo';
+import thunk from 'redux-thunk';
+import api from './middlewares/api';
 
-const store = createStore(Reducer);
+const store = createStore(Reducer, applyMiddleware(thunk, api));
 
 ReactDOM.render(
   <Provider store={store}>

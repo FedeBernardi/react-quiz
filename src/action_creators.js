@@ -1,14 +1,34 @@
-export function setEntries(entries){
+import axios from 'axios';
+
+const BASE_URL = 'http://localhost:3002';
+
+//We don't need this function anymore because we access to
+//it from 'fetchQuestions'.
+/*export function setEntries(entries){
   return {
     type: 'SET_ENTRIES',
     entries
   };
+}*/
+
+export function fetchQuestions (){
+  return {
+    callApi: {
+      config: {
+        baseURL: BASE_URL,
+        url: '/questions',
+        method: 'GET',
+        headers: {'Content-Type':'application/x-www-form-urlencoded'}
+      },
+      types: ['SET_ENTRIES']
+    }
+
+  }
 }
 
-export function startGame(user){
+export function startGame(){
   return {
-    type: 'START_GAME',
-    user
+    type: 'START_GAME'
   };
 }
 
@@ -31,3 +51,51 @@ export function setResults(){
   };
 }
 
+export function requestLogin(){
+  return {
+    type: 'REQUEST'
+  };
+}
+
+export function loginSuccess(username){
+  return {
+    type: 'LOGIN_SUCCESS',
+    username
+  };
+}
+
+export function loginFailure(error){
+  return {
+    type: 'LOGIN_FAILURE',
+    error
+  };
+}
+
+//@TODO:
+//  Add the credentials to the API call as data.
+export function loginUser(creds){
+  let config = {
+    baseURL: BASE_URL,
+    url: '/tokens/0',
+    method: 'GET',
+    headers: {'Content-Type':'application/x-www-form-urlencoded'}
+  }
+
+  return (dispatch) => {
+    dispatch(requestLogin());
+    return axios(config)
+      .then(response => {
+        if(response.status === 200) {
+          dispatch(loginSuccess(creds.user));
+
+          //Persisting Token in Local Storage
+          let token = JSON.stringify(response.data.token)
+          localStorage.setItem('id_token', token);
+        }
+        else {
+          dispatch(loginFailure(response.error));
+          return Promise.reject();
+        }
+      }).catch(err => console.log("Error: ", err))
+  }
+}

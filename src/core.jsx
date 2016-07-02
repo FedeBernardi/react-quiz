@@ -1,4 +1,6 @@
 import { Map, List, fromJS } from 'immutable';
+import { combineReducers } from 'redux-immutable';
+
 
 /*
 * Include entries in state (to use before start a new game)
@@ -8,19 +10,16 @@ export function setEntries(state, entries) {
 }
 
 /*
-* Init user, tally and first round to star to play
+* Init tally and first round to star to play
 * @param Map state
-* @param string newUser
-* @TODO newUser will be a map (or object) in future versions
 */
-export function startGame(state, newUser) {
+export function startGame(state) {
   const entries = state.get('entries');
   return state.merge({
     game: Map(
       {
         round: entries.first(),
-        tally: 0,
-        user: newUser
+        tally: 0
       }
     ),
     entries: entries.skip(1)
@@ -61,8 +60,7 @@ export function next(state) {
       game: Map(
         {
           round: entries.first(),
-          tally: state.getIn(['game','tally']),
-          user: state.getIn(['game','user'])
+          tally: state.getIn(['game','tally'])
         }
       ),
       entries: entries.skip(1)
@@ -71,8 +69,7 @@ export function next(state) {
   return state.merge({
     game: Map(
       {
-        tally: state.getIn(['game','tally']),
-        user: state.getIn(['game','user'])
+        tally: state.getIn(['game','tally'])
       }
     ),
     entries: List()
@@ -86,14 +83,12 @@ export function next(state) {
 * @param Map state
 */
 export function setResults(state) {
-  const userInGame = state.getIn(['game','user']);
   const tallyInGame = state.getIn(['game','tally']);
   if (!state.hasIn(['game','round'])) {
     return Map({
       results: List.of(
         Map(
           {
-            user: userInGame,
             tally: tallyInGame
           }
         )
@@ -104,12 +99,12 @@ export function setResults(state) {
 }
 
 
-export default function (state = Map(), action) {
+function app (state = Map(), action) {
   switch(action.type) {
     case 'SET_ENTRIES':
-      return setEntries(state, action.entries);
+      return setEntries(state, action.data);
     case 'START_GAME':
-      return startGame(state, action.user);
+      return startGame(state);
     case 'PLAY':
       return state.update('game', gameState =>
         play(gameState, action.answer)
@@ -122,3 +117,52 @@ export default function (state = Map(), action) {
       return state;
   }
 }
+
+
+//AUTH REDUCER
+//
+
+export function requestLogin(authState){
+  return authState.merge({
+    isFetching: true,
+    isAuthenticated: false
+  });
+}
+
+export function loginSuccess (authState, username) {
+  return authState.merge({
+    isFetching: false,
+    isAuthenticated: true,
+    user: username,
+    errorMessage: ''
+  });
+}
+
+export function loginFailure (authState, error) {
+  return authState.merge({
+    isFetching: false,
+    isAuthenticated: false,
+    errorMessage: error
+  });
+}
+
+
+function auth (state = fromJS({
+  isFetching: false,
+  isAuthenticated: localStorage.getItem('id_token') ? true: false
+}), action){
+
+  switch(action.type) {
+    case 'REQUEST':
+      return requestLogin(state);
+    case 'LOGIN_SUCCESS':
+      return loginSuccess(state, action.username);
+    case 'LOGIN_FAILURE':
+      return loginFailure(state, action.error);
+    default:
+      return state;
+  }
+
+}
+
+export default combineReducers({app, auth});

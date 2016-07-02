@@ -1,13 +1,12 @@
 import React from 'react';
 import Button from './Button';
-import { entries } from '../entries';
 
 export const LogIn = React.createClass({
   displayName: 'LogIn',
 
   propTypes: {
     history: React.PropTypes.object,
-    setEntries: React.PropTypes.func,
+    fetchQuestions: React.PropTypes.func,
     startGame: React.PropTypes.func
   },
 
@@ -23,10 +22,12 @@ export const LogIn = React.createClass({
   //also executes the action to set the entries and start the game.
   handleButtonClick(){
     if (this.state.userText && !this.flagToPlay) {
-      this.props.setEntries(entries);
-      this.props.startGame(this.state.userText);
-      // se supone q debo usar this.context.router.push pero no anda :(
-      this.props.history.push('/game');
+      this.props.loginUser({user: this.state.userText});
+      this.props.fetchQuestions()
+        .then(()=>{
+          this.props.startGame();
+          this.props.history.push('/game');
+        });
     }
   },
 
