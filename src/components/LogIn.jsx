@@ -23,14 +23,11 @@ export const LogIn = React.createClass({
   handleButtonClick(){
     if (this.state.userText && !this.flagToPlay) {
       this.props.loginUser({user: this.state.userText});
-      this.props.fetchQuestions();
-
-      //Temporal solution for timing problems when
-      //we fetch the questions
-      setTimeout(() => {
-        this.props.startGame();
-        this.props.history.push('/game');
-      }, 1000);
+      this.props.fetchQuestions()
+        .then(()=>{
+          this.props.startGame();
+          this.props.history.push('/game');
+        });
     }
   },
 
