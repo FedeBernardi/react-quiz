@@ -19,7 +19,7 @@ function callApi (config) {
 }
 
 export default store => next => action =>{
-  
+  console.log(action);
   //This evaluates if the action needs to call the API
   //to do his job. If not, the action is executed. 
   if (!action.callApi) {
@@ -28,7 +28,11 @@ export default store => next => action =>{
 
   let { config, types } = action.callApi
   
-  const [ successType, errorType ] = types
+  const [ requestType, successType, errorType ] = types
+
+  if(requestType != null){
+    next({type: requestType});
+  }
 
   return callApi(config).then(
     response => 

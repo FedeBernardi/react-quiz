@@ -20,7 +20,7 @@ export function fetchQuestions (){
         method: 'GET',
         headers: {'Content-Type':'application/x-www-form-urlencoded'}
       },
-      types: ['SET_ENTRIES']
+      types: [null, 'SET_ENTRIES', null]
     }
 
   }
@@ -53,7 +53,7 @@ export function setResults(){
 
 export function requestLogin(){
   return {
-    type: 'REQUEST'
+    type: 'REQUEST_LOGIN'
   };
 }
 

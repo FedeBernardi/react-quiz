@@ -153,7 +153,7 @@ function auth (state = fromJS({
 }), action){
 
   switch(action.type) {
-    case 'REQUEST':
+    case 'REQUEST_LOGIN':
       return requestLogin(state);
     case 'LOGIN_SUCCESS':
       return loginSuccess(state, action.username);

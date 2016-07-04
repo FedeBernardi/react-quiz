@@ -15,14 +15,13 @@ export const Results = React.createClass({
   },
 
   handlePlayAgainButtonClick(){
-    this.props.fetchQuestions();
-
-    //Temporal solution for timing problems when
-    //we fetch the questions
-    setTimeout(() => {
-      this.props.startGame();
-      this.props.history.push('/game');
-    }, 1000);
+    this.props.fetchQuestions()
+      .then(()=>{
+        this.props.startGame();
+        this.props.history.push('/game');
+      }, ()=>{
+          alert("Error!");
+      });
   },
 
   handleLogInButtonClick(){

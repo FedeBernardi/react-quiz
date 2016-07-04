@@ -16,6 +16,10 @@ import api from './middlewares/api';
 
 const store = createStore(Reducer, applyMiddleware(thunk, api));
 
+store.subscribe(function (){
+  console.log(store.getState());
+});
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={hashHistory}>
