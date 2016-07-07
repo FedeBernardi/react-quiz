@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3002';
+const BASE_URL = 'http://localhost:3001/api';
 
 //We don't need this function anymore because we access to
 //it from 'fetchQuestions'.
@@ -76,21 +76,22 @@ export function loginFailure(error){
 export function loginUser(creds){
   let config = {
     baseURL: BASE_URL,
-    url: '/tokens/0',
-    method: 'GET',
-    headers: {'Content-Type':'application/x-www-form-urlencoded'}
+    url: 'users/login',
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    data: creds
   }
 
   return (dispatch) => {
     dispatch(requestLogin());
     return axios(config)
       .then(response => {
-        if(response.status === 200) {
-          dispatch(loginSuccess(creds.user));
+        if(response.data[0]) {
+          dispatch(loginSuccess(response.data[0].username));
 
           //Persisting Token in Local Storage
-          let token = JSON.stringify(response.data.token)
-          localStorage.setItem('id_token', token);
+          //let token = JSON.stringify(response.data[1])
+          //localStorage.setItem('id_token', token);
         }
         else {
           dispatch(loginFailure(response.error));

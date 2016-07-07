@@ -19,7 +19,6 @@ function callApi (config) {
 }
 
 export default store => next => action =>{
-  console.log(action);
   //This evaluates if the action needs to call the API
   //to do his job. If not, the action is executed. 
   if (!action.callApi) {
