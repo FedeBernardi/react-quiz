@@ -22,14 +22,21 @@ export const LogIn = React.createClass({
   //also executes the action to set the entries and start the game.
   handleButtonClick(){
     if (this.state.userText && !this.flagToPlay) {
-      this.props.loginUser({username: this.state.userText});
-      this.props.fetchQuestions()
-        .then(() => {
-          this.props.startGame();
-          this.props.history.push('/game');
-      }, () => {
-          alert('Connection Error');
-      });
+      this.props.loginUser({username: this.state.userText})
+        .then((response) => {
+          if(response){
+            this.props.fetchQuestions()
+              .then(() => {
+                this.props.startGame();
+                this.props.history.push('/game');
+            }, () => {
+                alert('Connection Error');
+            });
+          }
+          else{
+            alert('User doesn\'t exists');
+          }
+        });
     }
   },
 

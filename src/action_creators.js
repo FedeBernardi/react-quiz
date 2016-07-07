@@ -92,11 +92,12 @@ export function loginUser(creds){
           //Persisting Token in Local Storage
           //let token = JSON.stringify(response.data[1])
           //localStorage.setItem('id_token', token);
+          return true;
         }
         else {
-          dispatch(loginFailure(response.error));
-          return Promise.reject();
+          dispatch(loginFailure('Incorrect username or password'));
+          return false;
         }
-      }).catch(err => console.log("Error: ", err))
+      });
   }
 }
