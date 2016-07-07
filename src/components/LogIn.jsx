@@ -13,7 +13,7 @@ export const LogIn = React.createClass({
   getInitialState() {
     return {
       userText: '',
-      flagToPlay: true
+      passText: ''
     };
   },
 
@@ -22,7 +22,7 @@ export const LogIn = React.createClass({
   //also executes the action to set the entries and start the game.
   handleButtonClick(){
     if (this.state.userText && !this.flagToPlay) {
-      this.props.loginUser({username: this.state.userText})
+      this.props.loginUser({username: this.state.userText, password: this.state.passText})
         .then((response) => {
           if(response){
             this.props.fetchQuestions()
@@ -33,20 +33,20 @@ export const LogIn = React.createClass({
                 alert('Connection Error');
             });
           }
-          else{
-            alert('User doesn\'t exists');
-          }
         });
     }
   },
 
   //@params: e: Object
   //The function set the user input in a state
-  //and enables or disables the play button
-  //depending on the length of the input
+  handlePassInput(e){
+    this.setState({ passText: e.target.value });
+  },
+
+  //@params: e: Object
+  //The function set the user input in a state
   handleTextInput(e) {
     this.setState({ userText: e.target.value });
-    this.setState({ flagToPlay: (e.target.value.length < 4) });
   },
 
   render() {
@@ -54,20 +54,32 @@ export const LogIn = React.createClass({
       <div className='login'>
         <div className='row'>
           <div className='col-md-12'>
-            <label className='login-label'>Username</label>
+            <label className='login-label' htmlFor='userInput'>Username</label>
           </div>
         </div>
         <div className='row'>
           <div className='col-md-12'>
-            <input className='login-input'
+            <input id='userInput' className='login-input'
               onChange={this.handleTextInput}
               type='text'
             />
           </div>
         </div>
-        <Button text='Play !' onHandleButtonClick={this.handleButtonClick}
-          disabled={this.state.flagToPlay}
-        />
+        <div className='row'>
+          <div className='col-md-12'>
+            <label className='login-label' htmlFor='passInput'>Password</label>
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-md-12'>
+            <input id='passInput' className='login-input'
+              onChange={this.handlePassInput}
+              type='password'
+            />
+          </div>
+        </div>
+        {this.props.errorMessage ? <div className='errorMsg fadeInUp '>{this.props.errorMessage}</div> : ''}
+        <Button text='Play !' onHandleButtonClick={this.handleButtonClick} />
       </div>);
   }
 });

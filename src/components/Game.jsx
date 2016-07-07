@@ -14,6 +14,7 @@ export const Game = React.createClass({
 
   propTypes: {
     answers: React.PropTypes.object,
+    errorMessage: React.PropTypes.string,
     correct: React.PropTypes.number,
     history: React.PropTypes.object,
     play: React.PropTypes.func,
@@ -31,6 +32,10 @@ export const Game = React.createClass({
     }
   },
 
+  //This function set the style for the answers depending if the
+  //user selected one or not.
+  //@params:
+  //  id: is the answers id
   setAnswerStyle(id){
     if(this.props.selected){
       if(id == this.props.correct){

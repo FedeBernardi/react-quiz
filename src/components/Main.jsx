@@ -20,4 +20,10 @@ export const Main = React.createClass({
   }
 });
 
-export const MainContainer = connect(null, actionCreators)(Main);
+function mapStateToProps(state){
+  return {
+    errorMessage: state.getIn(['auth','errorMessage'])
+  };
+}
+
+export const MainContainer = connect(mapStateToProps, actionCreators)(Main);
