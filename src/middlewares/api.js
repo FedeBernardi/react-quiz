@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //@TODO:
-//  Add the token to as data to send to the API.
+//  Add the token as data to send to the API.
 function callApi (config) {
   //We are not using this for the moment, but in the future
   //we will need it to make the request.

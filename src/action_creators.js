@@ -86,16 +86,16 @@ export function loginUser(creds){
     dispatch(requestLogin());
     return axios(config)
       .then(response => {
-        if(response.data[0]) {
-          dispatch(loginSuccess(response.data[0].username));
+        if(!response.data.error) {
+          dispatch(loginSuccess(response.data.username));
 
           //Persisting Token in Local Storage
-          //let token = JSON.stringify(response.data[1])
-          //localStorage.setItem('id_token', token);
+          let token = JSON.stringify(response.data.token);
+          localStorage.setItem('id_token', token);
           return true;
         }
         else {
-          dispatch(loginFailure('Incorrect username or password'));
+          dispatch(loginFailure(response.data.error));
           return false;
         }
       });
