@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = 'http://localhost:3001/api';
+const BASE_URL = 'http://localhost:3001/';
 
 //We don't need this function anymore because we access to
 //it from 'fetchQuestions'.
@@ -18,7 +18,7 @@ export function fetchQuestions (){
         baseURL: BASE_URL,
         url: '/questions',
         method: 'GET',
-        headers: {'Content-Type':'application/x-www-form-urlencoded'}
+        headers: {'Content-Type':'application/json'}
       },
       types: [null, 'SET_ENTRIES', null]
     }

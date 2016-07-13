@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-//@TODO:
-//  Add the token as data to send to the API.
+
 function callApi (config) {
-  //We are not using this for the moment, but in the future
-  //we will need it to make the request.
-  let token = localStorage.getItem('id_token') || null
+
+  //Adding token to header
+  let token = JSON.parse(localStorage.getItem('id_token')) || null;
+  config.headers.Authorization = `Bearer ${token}`;
 
   return axios(config)
     .then((response) => {
