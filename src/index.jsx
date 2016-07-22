@@ -15,6 +15,7 @@ import { MainContainer } from './components/Main';
 import { GameContainer } from './components/Game';
 import { ResultsContainer } from './components/Results';
 import Header from './components/Header';
+import Footer from './components/Footer';
 
 const store = createStore(Reducer, applyMiddleware(thunk, api));
 
@@ -25,14 +26,17 @@ store.subscribe(function (){
 ReactDOM.render(
   <div className="main container">
     <Header appName="React Quiz"/>
-    <Provider store={store}>
-      <Router history={hashHistory}>
-        <Route path='/' component={MainContainer} />
-        <Route path='/game' component={GameContainer} />
-        <Route path='/demo' component={Demo} />
-        <Route path='/results' component={ResultsContainer} />
-      </Router>
-    </Provider>
+    <div>
+      <Provider store={store}>
+        <Router history={hashHistory}>
+          <Route path='/' component={MainContainer} />
+          <Route path='/game' component={GameContainer} />
+          <Route path='/demo' component={Demo} />
+          <Route path='/results' component={ResultsContainer} />
+        </Router>
+      </Provider>
+      <Footer />
+    </div>
   </div>,
   document.getElementById('app')
 );

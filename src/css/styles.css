@@ -19,10 +19,10 @@ body{
 
 .main {
   height: 100%;
-}
-
-.container {
+  border: 5px solid #1a75ff;
   width: 800px;
+  padding: 0;
+  position: relative;
 }
 
 .centeredElement{
@@ -57,15 +57,13 @@ body{
   This will be here for now, i don't know if i'm going
   to keep it.
  */
-.footer > a{
-  color: #FFF;
-}
-
-.footer{
-  margin: 20px 25%;
-}
-
 .component-demo {
   margin-top: 40px;
+}
+
+@media(max-width: 800px){
+  .main{
+    width: 100%;
+  }
 }
 

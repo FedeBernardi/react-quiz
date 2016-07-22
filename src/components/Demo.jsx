@@ -10,8 +10,7 @@ export default React.createClass({
 
   render() {
     return (
-      <div className='main'>
-        <Header appName='React Quiz - Components Demo' />
+      <div>
         <ul>
           <li><a href='#header-component'>{"Header"}</a></li>
           <li><a href='#login'>{"LogIn"}</a></li>

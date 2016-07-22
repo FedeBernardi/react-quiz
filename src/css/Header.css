@@ -2,11 +2,14 @@
   min-height: 70px;
   background-color: #1a75ff !important;
   color: #FFF;
+  border-radius: 0 !important;
+  border: 0 !important;
 }
 
 .navbar-header{
   float:none !important;
   text-align: center !important;
+  border: 0;
 }
 
 .navbar-brand-name {

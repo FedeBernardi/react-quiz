@@ -10,9 +10,7 @@ export const Main = React.createClass({
     return (
       <div>
         <LogIn {...this.props} />
-        {/*<div className='footer navbar navbar-default navbar-fixed-bottom'>
-          <a href='#/demo'>Components Demo</a>
-        </div>*/}
+        <a href='#/demo'>Components Demo</a>
       </div>
     );
   }
