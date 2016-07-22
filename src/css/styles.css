@@ -28,28 +28,12 @@ html {
   margin-top: 40px;
 }
 
-.game {
-  margin: 0;
-  background: #1a75ff;
-  padding: 20px;
-}
-
-.user {
-  font-size: 14px;
-  font-weight: bold;
-  padding-top: 40px;
-}
-
 .question {
   font-size: 18px;
 }
 
 .login-play-button .btn {
   width: 100%;
-}
-
-.tally {
-
 }
 
 .centeredElement{

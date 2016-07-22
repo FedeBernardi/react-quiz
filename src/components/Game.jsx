@@ -1,3 +1,5 @@
+require('../css/Game.css');
+
 import React from 'react';
 import { connect } from 'react-redux';
 import Header from './Header';
@@ -57,7 +59,7 @@ export const Game = React.createClass({
           </div>
           <div className='col-md-6'>
             <Quit history={this.props.history} />
-            <span className='text-right tally'>
+            <span className='text-right'>
               <Tally total={this.props.tally} />
             </span>
           </div>
