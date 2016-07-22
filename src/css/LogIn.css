@@ -1,0 +1,15 @@
+.login {
+  margin: 0 25% auto;
+  padding-top: 80px;
+}
+
+.login-label {
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+}
+
+.login-input {
+  width: 100%;
+  font-size: 18px;
+}

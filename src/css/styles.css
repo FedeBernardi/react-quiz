@@ -1,5 +1,8 @@
+/*
+  This file contains style that is used for many components
+ */
+
 @import url(//fonts.googleapis.com/css?family=Pacifico);
-@import url(http://csshake.surge.sh/csshake.min.css);
 
 html {
   font-family: Arial, serif;
@@ -38,22 +41,6 @@ html {
 }
 
 .question {
-  font-size: 18px;
-}
-
-.login {
-  margin: 0 25% auto;
-  padding-top: 80px;
-}
-
-.login-label {
-  font-size: 18px;
-  width: 100%;
-  text-align: center;
-}
-
-.login-input {
-  width: 100%;
   font-size: 18px;
 }
 
