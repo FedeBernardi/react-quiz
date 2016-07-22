@@ -1,0 +1,15 @@
+.navbar {
+  min-height: 70px;
+  background-color: #1a75ff !important;
+  color: #FFF;
+}
+
+.navbar-header{
+  float:none !important;
+  text-align: center !important;
+}
+
+.navbar-brand-name {
+  margin: 0 20px 0 0;
+  font-family: Pacifico;
+}

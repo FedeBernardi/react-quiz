@@ -1,3 +1,5 @@
+require('../css/Header.css');
+
 import React from 'react';
 
 export default React.createClass({

@@ -13,22 +13,6 @@ html {
   width: 800px;
 }
 
-.navbar {
-  min-height: 70px;
-  background-color: #1a75ff;
-  color: #FFF;
-}
-
-.navbar-header{
-  float:none;
-  text-align: center;
-}
-
-.navbar-brand-name {
-  margin: 0 20px 0 0;
-  font-family: Pacifico;
-}
-
 .footer > a{
   color: #FFF;
 }
