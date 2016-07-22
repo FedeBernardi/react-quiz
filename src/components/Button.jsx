@@ -1,3 +1,5 @@
+require('../css/Button.css');
+
 import React from 'react';
 
 export default React.createClass({
