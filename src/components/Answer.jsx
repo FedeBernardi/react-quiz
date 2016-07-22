@@ -1,3 +1,5 @@
+require('../css/Answer.css');
+
 import React from 'react';
 
 export const Answer = React.createClass({

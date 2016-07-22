@@ -1,0 +1,27 @@
+.answerBlock{
+  width:60%;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 20px;
+  color: #000;
+  background-color: #FFF;
+  padding: 5px;
+  border: 2px solid #1a75ff;
+}
+
+.answerBlock > p {
+  margin: 0;
+}
+
+.answerBlockHover:hover{
+  background-color:#a6a6a6;
+  color: #000;
+}
+
+.correctAnswer{
+  background-color: #80ff80;
+}
+
+.incorrectAnswer{
+  background-color: #ff3333;
+}
