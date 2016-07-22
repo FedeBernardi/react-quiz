@@ -2,7 +2,6 @@ require('../css/Results.css');
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from './Header';
 import Button from './Button';
 import * as actionCreators from '../action_creators';
 
@@ -32,8 +31,7 @@ export const Results = React.createClass({
 
   render() {
     return (
-      <div className='main container-fluid'>
-        <Header appName='React Quiz' />
+      <div>
         <div className='resultText'>
           <h1>You finished the game !</h1>
           <h2>Final score:</h2>

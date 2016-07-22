@@ -6,10 +6,19 @@
 
 html {
   font-family: Arial, serif;
+  height: 100%;
+}
+
+body{
+  height: 100%;
+}
+
+#app{
+  height: 100%;
 }
 
 .main {
-  margin: 20px 25%;
+  height: 100%;
 }
 
 .container {

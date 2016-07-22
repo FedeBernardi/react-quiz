@@ -2,7 +2,6 @@ require('../css/Game.css');
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Header from './Header';
 import Question from './Question';
 import Tally from './Tally';
 import Next from './Next';
@@ -51,8 +50,7 @@ export const Game = React.createClass({
 
   render() {
     return (
-      <div className='main container-fluid'>
-        <Header appName='React Quiz' />
+      <div>
         <div className='row'>
           <div className='col-md-6'>
             <p className='user'>Player: {this.props.userName}</p>

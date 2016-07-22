@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { LogIn } from './LogIn';
-import Header from './Header';
 import * as actionCreators from '../action_creators';
 
 export const Main = React.createClass({
@@ -9,12 +8,11 @@ export const Main = React.createClass({
   
   render(){
     return (
-      <div className='main container-fluid'>
-        <Header appName='React Quiz' />
+      <div>
         <LogIn {...this.props} />
-        <div className='footer navbar navbar-default navbar-fixed-bottom'>
+        {/*<div className='footer navbar navbar-default navbar-fixed-bottom'>
           <a href='#/demo'>Components Demo</a>
-        </div>
+        </div>*/}
       </div>
     );
   }
