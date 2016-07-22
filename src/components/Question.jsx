@@ -1,3 +1,5 @@
+require('../css/Question.css');
+
 import React from 'react';
 
 export default React.createClass({
