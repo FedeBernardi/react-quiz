@@ -20,7 +20,7 @@ export default React.createClass({
           <div className='javascript'>
             {"<Header appName='name' />"}
           </div>
-          <Header appName='React Quiz' />
+          <Header appName='Demo' />
         </div>
         <div id='login-component' className='component-demo'>
           <h3>{"LogIn"}</h3>

@@ -18,7 +18,8 @@ body{
 }
 
 .main {
-  height: 100%;
+  height: auto;
+  min-height: 100%;
   border: 5px solid #1a75ff;
   width: 800px;
   padding: 0;
