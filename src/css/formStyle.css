@@ -1,0 +1,32 @@
+.form {
+  margin: 0 25% auto;
+  padding-top: 50px;
+}
+
+.form-label {
+  font-size: 18px;
+  width: 100%;
+  text-align: center;
+}
+
+.form-input {
+  width: 100%;
+  font-size: 18px;
+}
+
+ul{
+  padding: 0;
+  margin-top: 10px;
+  list-style: none;
+  height: 25px;
+}
+
+.generalError{
+  text-align: center;
+  color: #ff751a;
+}
+
+.successfulMsg{
+  text-align: center;
+  color: #00e600;
+}

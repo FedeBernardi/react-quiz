@@ -80,7 +80,7 @@ export function loginUser(creds){
     method: 'POST',
     headers: {'Content-Type':'application/json'},
     data: creds
-  }
+  };
 
   return (dispatch) => {
     dispatch(requestLogin());
@@ -100,4 +100,24 @@ export function loginUser(creds){
         }
       });
   }
+}
+
+export function registerUser(creds){
+  let config = {
+    baseURL: BASE_URL,
+    url: 'users/registration',
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    data: creds
+  };
+
+  return axios(config)
+    .then(response => {
+      if(!response.data.error){
+        return true;
+      }
+      else{
+        return false;
+      }
+    });
 }

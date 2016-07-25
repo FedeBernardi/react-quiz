@@ -12,6 +12,7 @@ import thunk from 'redux-thunk';
 import api from './middlewares/api';
 
 import { MainContainer } from './components/Main';
+import Registration from './components/Registration';
 import { GameContainer } from './components/Game';
 import { ResultsContainer } from './components/Results';
 import Header from './components/Header';
@@ -30,6 +31,7 @@ ReactDOM.render(
       <Provider store={store}>
         <Router history={hashHistory}>
           <Route path='/' component={MainContainer} />
+          <Route path='/registration' component={Registration} />
           <Route path='/game' component={GameContainer} />
           <Route path='/demo' component={Demo} />
           <Route path='/results' component={ResultsContainer} />

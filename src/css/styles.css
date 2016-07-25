@@ -27,6 +27,11 @@ body{
   position: relative;
 }
 
+.title{
+  margin-bottom: 40px;
+  text-align: center;
+}
+
 .centeredElement{
   display:block;
   margin-left: auto;
