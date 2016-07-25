@@ -35,8 +35,8 @@ ReactDOM.render(
           <Route path='/results' component={ResultsContainer} />
         </Router>
       </Provider>
-      <Footer />
     </div>
+    <Footer />
   </div>,
   document.getElementById('app')
 );
