@@ -9,22 +9,32 @@ export default React.createClass({
     text: React.PropTypes.string,
     onHandleButtonClick: React.PropTypes.func,
     disabled: React.PropTypes.bool,
-    align: React.PropTypes.string
+    align: React.PropTypes.string,
+    displayAs: React.PropTypes.string,
+    buttonType: React.PropTypes.string
   },
-  getDefaultProps: function() {
+
+  getDefaultProps() {
     return {
-      align: 'center-block'
+      align: 'center-block',
+      displayAs: 'row',
+      buttonType: 'btn-primary'
     };
   },
-  alignButton: function() {
-    return 'btn btn-lg btn-primary fadeInUp ' + this.props.align;
+
+  buttonOptions() {
+    return `btn btn-lg fadeInUp ${this.props.align} ${this.props.buttonType}`;
+  },
+
+  displayButtonAs() {
+    return 'button ' + this.props.displayAs;
   },
 
   render() {
     return (
-      <div className='row button'>
+      <div className={this.displayButtonAs()}>
         <div className='col-md-12'>
-          <button className={this.alignButton()}
+          <button className={this.buttonOptions()}
             onClick={this.props.onHandleButtonClick}
             disabled={this.props.disabled}
           >
