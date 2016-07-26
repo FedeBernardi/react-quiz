@@ -1,9 +1,11 @@
 require('../css/formStyle.css');
 
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from './Button';
+import * as actionCreators from '../action_creators';
 
-export const LogIn = React.createClass({
+const LogIn = React.createClass({
   displayName: 'LogIn',
 
   propTypes: {
@@ -90,3 +92,11 @@ export const LogIn = React.createClass({
       </div>);
   }
 });
+
+function mapStateToProps(state){
+  return {
+    errorMessage: state.getIn(['auth','errorMessage'])
+  };
+}
+
+export const LogInContainer = connect(mapStateToProps, actionCreators)(LogIn);

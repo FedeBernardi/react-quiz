@@ -60,17 +60,15 @@ body{
   }
 }
 
-/*
-  This will be here for now, i don't know if i'm going
-  to keep it.
- */
-.component-demo {
-  margin-top: 40px;
-}
-
 @media(max-width: 800px){
   .main{
     width: 100%;
   }
 }
 
+/*
+  Modifications to boostrap buttons
+ */
+.btn{
+  border-radius: 0;
+}
