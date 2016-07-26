@@ -19,11 +19,12 @@ ul{
   margin-top: 10px;
   list-style: none;
   height: 25px;
+  color: #ff6600;
 }
 
 .generalError{
   text-align: center;
-  color: #ff751a;
+  color: #ff3333;
 }
 
 .successfulMsg{

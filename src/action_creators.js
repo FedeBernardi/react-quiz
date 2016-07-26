@@ -71,8 +71,11 @@ export function loginFailure(error){
   };
 }
 
-//@TODO:
-//  Add the credentials to the API call as data.
+//Makes the call to the API for the login. Sends the credential
+//that will be used to verify the existence of the user. If exists
+//the state tree is modify and the token returned by the API is stored
+//in the localstorage.
+//@return: promise.
 export function loginUser(creds){
   let config = {
     baseURL: BASE_URL,
@@ -102,6 +105,9 @@ export function loginUser(creds){
   }
 }
 
+//The function executes the call to the API with the credentials
+//of the new user to be stored on the data base.
+//@return: promise
 export function registerUser(creds){
   let config = {
     baseURL: BASE_URL,
@@ -111,13 +117,5 @@ export function registerUser(creds){
     data: creds
   };
 
-  return axios(config)
-    .then(response => {
-      if(!response.data.error){
-        return true;
-      }
-      else{
-        return false;
-      }
-    });
+  return axios(config);
 }

@@ -2,11 +2,10 @@ require('../css/formStyle.css');
 
 import React from 'react';
 import Button from './Button';
-import registerUser from '../action_creators.js';
+import { registerUser } from '../action_creators.js';
 
 export default React.createClass({
   displayName: 'Registration',
-
 
   getInitialState() {
       return {
@@ -21,7 +20,9 @@ export default React.createClass({
           statePassword: 0,
           stateRepPassword: 0,
           disabledSubmition: true,
-          submitionMsg: ''
+          //submitionMsg[0] = Message
+          //submitionMsg[1] = cssClass
+          submitionMsg: ['','']
       };
   },
 
@@ -60,7 +61,6 @@ export default React.createClass({
   //function that handles the error messages of the input when the user
   //loses the focus of it.
   onBlurEvent(type){
-
     switch(type){
       case 'username':
         return (e) => {
@@ -92,18 +92,34 @@ export default React.createClass({
     }        
   },
 
-  // @todo: make the call of the function 'registerUser' and
-  // apply the callbacks to the promise.
+  //When the user clicks, first we verify if the form can be submited.
+  //If it can, then we send an object with form's fields to the function
+  //that makes the call to the API. If it is successful the user sees a message
+  //and is redirected to the login page. If not another message is shown.
   handleRegistrationClick() {
-    if(true){
-      this.setState({submitionMsg : 'Successfuly registered!'});
-      setTimeout(() =>{
-        this.props.history.push('/');
-      }, 1000);
+    if(!this.state.disabledSubmition){
+      let creds = {
+        username: this.state.usernameInput,
+        password: this.state.passwordInput
+      };
+
+      registerUser(creds).then( () => {
+        this.setState({submitionMsg : ['Successfuly registered!', 'successfulMsg']});
+        setTimeout(() =>{
+          this.props.history.push('/');
+        }, 1000);
+      },
+        () => {
+          this.setState({submitionMsg : ['There was a problem with the registration :(', 'generalError']});
+        }
+      )
     }
-    else{
-      this.setState({submitionMsg : 'There was a problem with the registration :('});
-    }
+  },
+
+  //This function is the callback executed by the Cancel button,
+  //just redirecting to the login page.
+  handleCancelClick(){
+    this.props.history.push('/');
   },
 
   render() {
@@ -140,10 +156,15 @@ export default React.createClass({
           </li>
         </ul>
 
-        <Button text='Create account !' onHandleButtonClick={this.handleRegistrationClick} 
-          disabled={this.state.disabledSubmition} />
+        <div className='centeredElement'>
+          <Button text='Cancel' displayAs='lined' buttonType='btn-danger'
+            onHandleButtonClick={this.handleCancelClick} />
+          <Button text='Create account !' displayAs='lined' buttonType='btn-success'
+            onHandleButtonClick={this.handleRegistrationClick}
+            disabled={this.state.disabledSubmition} />
+        </div>
 
-        <h2 className='successfulMsg'>{this.state.submitionMsg}</h2>
+        <h2 className={this.state.submitionMsg[1]}>{this.state.submitionMsg[0]}</h2>
       </div>
     );
   }
