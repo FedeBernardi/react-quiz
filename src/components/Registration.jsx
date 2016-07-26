@@ -10,41 +10,48 @@ export default React.createClass({
 
   getInitialState() {
       return {
-          username : '',
-          password : '',
-          repPassword : '',
-          //Error codes:
+          usernameInput : '',
+          passwordInput : '',
+          repPasswordInput : '',
+          //State codes:
           //  0 = first render,
           //  1 = incorrect input,
           //  2 = correct input
-          errorUsername: 0,
-          errorPassword: 0,
-          errorRepPassword: 0,
+          stateUsername: 0,
+          statePassword: 0,
+          stateRepPassword: 0,
           disabledSubmition: true,
           submitionMsg: ''
       };
   },
 
+  componentDidUpdate(prevProps, prevState) {
+    this.checkSubmitionState();
+  },
+
   handleUsernameInput(e){
-    this.setState({username : e.target.value});
+    this.setState({usernameInput : e.target.value});
   },
 
   handlePasswordInput(e){
-    this.setState({password : e.target.value});
+    this.setState({passwordInput : e.target.value});
   },
 
   handleRepPasswordInput(e){
-    this.setState({repPassword : e.target.value});
+    this.setState({repPasswordInput : e.target.value});
   },
 
   //Checks if the form can be submited by adding the codes of the inputs error
   //messages. If all inputs are okay then the total will be 6 and the button will
-  //be enabled.
+  //be enabled. In order to avoid infinite loops in the life cycle, before update the
+  //state we check if we need to do it.
   checkSubmitionState(){
-    if(this.state.errorUsername + this.state.errorPassword + this.state.errorRepPassword != 6) {
-      this.setState({disabledSubmition : true});
+    if(this.state.stateUsername + this.state.statePassword + this.state.stateRepPassword != 6) {
+      if(!this.state.disabledSubmition){
+        this.setState({disabledSubmition : true});
+      }
     }
-    else{
+    else if(this.state.disabledSubmition){
       this.setState({disabledSubmition : false});
     }
   },
@@ -58,32 +65,29 @@ export default React.createClass({
       case 'username':
         return (e) => {
           if(e.target.value.length < 6){
-            this.setState({errorUsername : 1});
+            this.setState({stateUsername : 1});
           }
           else{
-            this.setState({errorUsername : 2});
+            this.setState({stateUsername : 2});
           }
-          this.checkSubmitionState();
         }
       case 'password':
         return (e) => {
           if(e.target.value.length < 6){
-            this.setState({errorPassword : 1});
+            this.setState({statePassword : 1});
           }
           else{
-            this.setState({errorPassword : 2})
+            this.setState({statePassword : 2})
           }
-          this.checkSubmitionState();
         }
       case 'repPassword':
         return (e) => {
-          if(e.target.value != this.state.password){
-            this.setState({errorRepPassword : 1});
+          if(e.target.value != this.state.passwordInput){
+            this.setState({stateRepPassword : 1});
           }
           else{
-            this.setState({errorRepPassword : 2});
+            this.setState({stateRepPassword : 2});
           }
-          this.checkSubmitionState();
         }
     }        
   },
@@ -112,7 +116,7 @@ export default React.createClass({
           onBlur={this.onBlurEvent('username')} />
         <ul>
           <li id='hiddenMsgUsername'>
-            {this.state.errorUsername == 1 ? 'Username must be between 6 and 15 characters.' : ''}
+            {this.state.stateUsername == 1 ? 'Username must be between 6 and 15 characters.' : ''}
           </li>
         </ul>
 
@@ -122,7 +126,7 @@ export default React.createClass({
           onBlur={this.onBlurEvent('password')} />
         <ul>
           <li id='hiddenMsgPassword'>
-            {this.state.errorPassword == 1 ? 'Password must be between 6 and 15 characters.' : ''}
+            {this.state.statePassword == 1 ? 'Password must be between 6 and 15 characters.' : ''}
           </li>
         </ul>
 
@@ -132,7 +136,7 @@ export default React.createClass({
           onBlur={this.onBlurEvent('repPassword')} />
         <ul>
           <li id='hiddenMsgRepPassword'>
-            {this.state.errorRepPassword == 1 ? 'Passwords must be the same.' : ''}
+            {this.state.stateRepPassword == 1 ? 'Passwords must be the same.' : ''}
           </li>
         </ul>
 
